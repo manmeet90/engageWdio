@@ -4,7 +4,7 @@ Feature: Engage -- Notifications
     So that I can check my notification alerts properly
 
     Background:
-        Given I visit "fmplogin" bla bla la
+        Given I visit "fmplogin"
         And I log in with "lionel.adams@fourth.com" and "Password3"
         When I add a new post
         And I do a @mention for "Sumana user"
