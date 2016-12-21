@@ -1,0 +1,8 @@
+[caps]
+automationName = "Appium"
+platformName = "Android"
+platformVersion = "6.0"
+deviceName = "87783bc4"
+app = "./android-latest.apk"
+appPackage = "com.fourth.marketplace"
+appActivity = "com.salesforce.androidsdk.phonegap.ui.SalesforceDroidGapActivity"
