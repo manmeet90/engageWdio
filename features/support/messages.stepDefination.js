@@ -36,13 +36,14 @@ module.exports = function() {
     this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
         //let message = "Test Message"; //FIXME: can we have generic message with test message in the argument
 
-        browser.pause(8000); // this should be the actual performance cut off time
-        expect(MessagesPage.lastUpdatedTime.getText()).toEqual(time);
-        browser.pause(10000);
+        //browser.pause(8000); // this should be the actual performance cut off time
+        browser.waitForVisible("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]",10000);
+        let ele = browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
+        expect(ele.getText()).toEqual(time);
+        // browser.pause(10000);
         let result = MessagesPage.hasMessageNodeWithMessage(text); //.waitForVisible(5000);
         expect(result.result).toEqual(true);
         //MessagesPage.lastUpdatedTime.waitForVisible();
-
     });
 
     //         When I click on message
