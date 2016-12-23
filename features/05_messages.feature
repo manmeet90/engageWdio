@@ -23,7 +23,6 @@ Feature: Engage -- Messages
         Then I verify that <replyText> appears on the message trail
         And number of replies text updated to "1"
 
-    @watch
     Scenario Outline: Verify a user can't @mention himself in the message
         When I click on Add new message
         And I do a @mention for "message_block:Approver Testington"
