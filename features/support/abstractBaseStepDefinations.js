@@ -27,7 +27,7 @@ module.exports = function() {
             MessagesPage.searchBoxInput.setValue(_searchText);
             MessagesPage.searchResultsList.waitForVisible(5000);
             browser.pause(5000);
-            if (MessagesPage.searchResultTargetUser) {
+            if (MessagesPage.searchResultTargetUser && MessagesPage.searchResultTargetUser.value) {
                 MessagesPage.searchResultTargetUser.click();
             }
         } else {

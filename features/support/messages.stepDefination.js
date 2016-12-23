@@ -15,9 +15,7 @@ module.exports = function() {
 
     //         When I click on Add new message
     this.When(/^I click on Add new message$/, () => {
-        // browser.pause(2000);// FIXME:use waitForVisible
         MainPage.addNewMessageButton.waitForVisible();
-        //   let _addNewMessageButton = browser.element(".nav-bar-block .right-buttons .button-icon:first-child");
         MainPage.addNewMessageButton.click();
     });
 
@@ -27,7 +25,7 @@ module.exports = function() {
     });
 
     //         Then I verify Message body to contain <messageText> and last updated Time to be <messageTime>
-    this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
+  /*  this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
         //let message = "Test Message"; //FIXME: can we have generic message with test message in the argument
         browser.pause(8000); // this should be the actual performance cut off time
         expect(MessagesPage.lastUpdatedTime.getText()).toEqual(time);
@@ -36,18 +34,17 @@ module.exports = function() {
         expect(result.result).toEqual(true);
         //MessagesPage.lastUpdatedTime.waitForVisible();
 
-    });
+    });*/
     this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
-            //let message = "Test Message"; //FIXME: can we have generic message with test message in the argument
-
             //browser.pause(8000); // this should be the actual performance cut off time
             browser.waitForVisible("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]",10000);
             let ele = browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
-            expect(ele.getText()).toEqual;
+            expect(ele.getText()).toEqual(time);
             // browser.pause(10000);
-            let result = MessagesPage.hasMessageNodeWithMessage(text); //.waitForVisible(5000);
-            expect(result.result).toEqual(true);
-            //MessagesPage.lastUpdatedTime.waitForVisible();
+            // let result = MessagesPage.hasMessageNodeWithMessage(text); //.waitForVisible(5000);
+            // expect(result.result).toEqual(true);
+            expect(MessagesPage.messageContent.getText()).toEqual(text);
+
         });
     //         When I click on message
     this.When(/^I click on message$/, () => {
@@ -60,8 +57,7 @@ module.exports = function() {
 
     //         Then I verify message details in <messageText> and <messageAfterTime>
     this.Then(/^I verify message details in "([^"]*)" and "([^"]*)"$/, (messageText, messageAfterTime) => {
-
-        MessagesPage.messageBodyText.waitForVisible();
+        MessagesPage.messageBodyText.waitForVisible(8000);
         expect(MessagesPage.messageBodyText.getText() == messageText).toEqual(true);
         //  expect(browser.$(".feed-element .list .item:first-child .relative-time-element").getText()).toEqual("Last Updated Just Now");
         expect(MessagesPage.lastUpdatedTimeOnMessageDetails.getText()).toEqual(messageAfterTime);
@@ -84,8 +80,24 @@ module.exports = function() {
     this.Then(/^I verify that "([^"]*)" appears on the message trail$/, function(replyText) {
 
         MessagesPage.commentItem.waitForVisible();
-
-        //console.log(MessagesPage.commentItem.getText());
         expect(MessagesPage.commentItem.getText()).toContain(replyText);
     });
+
+     this.Then(/^I verify message has "([^"]*)" button$/, function(btnText) {
+         expect(MessagesPage.hasReplyButtonForMessage(btnText)).toEqual(true);
+     });
+
+     
+     this.Then(/^message has number of replies text with value "([^"]*)"$/, function(repliesCount) {
+         expect(MessagesPage.numberOfRepliesText.getText()).toEqual(repliesCount);
+     });
+
+     this.Then(/^number of replies text updated to "([^"]*)"$/, function(repliesCount) {
+         expect(MessagesPage.numberOfRepliesTextInMessageDetailsPage.getText()).toEqual(repliesCount);
+     });
+
+     this.Then(/^search result should be empty$/, function(){
+         expect(browser.waitForExist(".search-people-modal .modal-content .mention-search", 2000, true)).toEqual(true);
+     });
+     
 };

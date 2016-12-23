@@ -12,7 +12,38 @@ var MessagesPage = Object.create(Page, {
   messageElement: { get: function() { return browser.$('.list .item:first-child'); } },// FIXME: can be done ina better way in future check with Team n devs
   messageTextArea: { get: function() { return browser.element('#post-textarea'); } },
   postButton: { get: function() { return browser.element('.primary-button'); } },
-  commentItem: { get: function() { return browser.element('.comment-item'); } }
+  commentItem: { get: function() { return browser.element('.comment-item'); } },
+
+  messageMentionedUser : { get: function(){
+    return browser.$(".view-container .feeds .item:first-child .feed-header");
+  }},
+  messageTimestamp : { get: function(){
+    return browser.$(".view-container .feeds .item:first-child .relative-time-element");
+  }},
+  messageContent : { get: function(){
+    return browser.$(".view-container .feeds .item:first-child .content-text");
+  }},
+
+  numberOfRepliesText : {
+    get : function(){
+      let elem = browser.$(".view-container .feeds .item:first-child .comment-counter>div:last-child .subdued");
+      browser.pause(10000);
+      if(elem){
+        return elem;
+      }
+    }
+  },
+
+  numberOfRepliesTextInMessageDetailsPage : {
+    get : function(){
+      let elem = browser.$(".list .item:first-child .comment-counter>div:last-child .subdued");
+      browser.pause(5000);
+      if(elem){
+        return elem;
+      }
+    }
+  }
+  //.primary-button
 });
 
 MessagesPage.hasMessageNodeWithMessage = function(messageText){
@@ -20,6 +51,16 @@ MessagesPage.hasMessageNodeWithMessage = function(messageText){
     let _elem = browser.element(_selector);
     let result = _elem.getText() == messageText ? true : false;
     return {elem: _elem, result :result};
+};
+
+MessagesPage.hasReplyButtonForMessage = function(btnText){
+    let elem = browser.$(".view-container .feeds .item:first-child .comment-counter .subdued");
+    elem.waitForVisible(10000);
+    if(elem && elem.value){
+      return elem.getText() === btnText ? true : false;
+    }else{
+      return false;
+    }
 };
 
 module.exports = MessagesPage;
