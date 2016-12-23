@@ -5,8 +5,6 @@ var LoginPage = require('../../pageobjects/login.page');
 const MessagesPage = require('../../pageobjects/messages.page');
 var AddPostModal = require('../../pageobjects/addpost.modal');
 
-//var AllApplicationsModal = require('../../pageobjects/allapplications.modal');
-
 module.exports = function() {
 
     //         Given I click the "Messages" side panel button
@@ -15,16 +13,12 @@ module.exports = function() {
         MainPage.leftSidePanel.click('*=' + text);
     });
 
-    //
-    //     @watch
-    //     Scenario Outline: Verify generation and reply on new message
     //         When I click on Add new message
     this.When(/^I click on Add new message$/, () => {
         // browser.pause(2000);// FIXME:use waitForVisible
-
-        MainPage._addNewMessageButton.waitForVisible();
+        MainPage.addNewMessageButton.waitForVisible();
         //   let _addNewMessageButton = browser.element(".nav-bar-block .right-buttons .button-icon:first-child");
-        MainPage._addNewMessageButton.click();
+        MainPage.addNewMessageButton.click();
     });
 
     //         And I write the message body
@@ -35,17 +29,26 @@ module.exports = function() {
     //         Then I verify Message body to contain <messageText> and last updated Time to be <messageTime>
     this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
         //let message = "Test Message"; //FIXME: can we have generic message with test message in the argument
-
-        //browser.pause(8000); // this should be the actual performance cut off time
-        browser.waitForVisible("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]",10000);
-        let ele = browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
-        expect(ele.getText()).toEqual(time);
-        // browser.pause(10000);
+        browser.pause(8000); // this should be the actual performance cut off time
+        expect(MessagesPage.lastUpdatedTime.getText()).toEqual(time);
+        browser.pause(10000);
         let result = MessagesPage.hasMessageNodeWithMessage(text); //.waitForVisible(5000);
         expect(result.result).toEqual(true);
         //MessagesPage.lastUpdatedTime.waitForVisible();
-    });
 
+    });
+    this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, (text, time) => {
+            //let message = "Test Message"; //FIXME: can we have generic message with test message in the argument
+
+            //browser.pause(8000); // this should be the actual performance cut off time
+            browser.waitForVisible("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]",10000);
+            let ele = browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
+            expect(ele.getText()).toEqual;
+            // browser.pause(10000);
+            let result = MessagesPage.hasMessageNodeWithMessage(text); //.waitForVisible(5000);
+            expect(result.result).toEqual(true);
+            //MessagesPage.lastUpdatedTime.waitForVisible();
+        });
     //         When I click on message
     this.When(/^I click on message$/, () => {
 

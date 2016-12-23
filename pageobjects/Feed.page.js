@@ -1,6 +1,6 @@
 var Page = require('./page.js');
 
-var MessagesPage = Object.create(Page, {
+var FeedPage = Object.create(Page, {
   searchUserModal: { get: function() { return browser.element('.search-people-modal'); } },
   searchBoxInput: { get: function() { return browser.element('.search-people-modal #search-input'); } },//try just #search-input
   searchResultsList: { get: function() { return browser.element('.search-people-modal .modal-content'); } },
@@ -15,11 +15,11 @@ var MessagesPage = Object.create(Page, {
   commentItem: { get: function() { return browser.element('.comment-item'); } }
 });
 
-MessagesPage.hasMessageNodeWithMessage = function(messageText){
+FeedPage.hasFeedNodeWithPost = function(PostText){
     let _selector = `.list p.content-text`;
     let _elem = browser.element(_selector);
-    let result = _elem.getText() == messageText ? true : false;
+    let result = _elem.getText() == PostText ? true : false;
     return {elem: _elem, result :result};
 };
 
-module.exports = MessagesPage;
+module.exports = FeedPage;

@@ -8,7 +8,6 @@ Feature: Engage -- Messages
         And I log in with "lionel.adams@fourth.com" and "Password3"
         Given I click the "Messages" side panel button
 
-    @watch
     Scenario Outline: Verify generation and reply on new message
         When I click on Add new message
         And I do a @mention for "message_block:Buyee"
