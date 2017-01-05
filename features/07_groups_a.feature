@@ -11,7 +11,6 @@ Feature: Engage -- Groups
 
   Scenario Outline: I should be able to add a new Post in Group with attachment
 
-<<<<<<< HEAD
     Given I click the "Groups" side panel button
     And I visit the "TS_QAI" group
     When I add a new post "Test Feed"
@@ -25,18 +24,3 @@ Feature: Engage -- Groups
     Examples:
             | fileNameText  |
             | cat.jpg       |
-=======
-  @watch
-  Scenario: I should be able to add a new Post in Group with attachment
-    Given I click the "Groups" side panel button
-    And I visit the "TS_QAI" group
-    When I click on new post button
-    Then click on attachment button
-    And attach file "C:\Users\Sony\Desktop\world.jpg"
-    Then I should see that file "world.jpg" in attachment section on create post form
-    Then I add post content "Test Message"
-    And click on "Submit" button
-    Then I should see the post on Feed
-
-  
->>>>>>> c573f3c68f2f8c7d62b434e8f6bebcdce4d6e275

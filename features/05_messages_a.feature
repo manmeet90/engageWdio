@@ -20,8 +20,6 @@ Feature: Engage -- Messages
         When I add <replyText>
         And I click on "Post" button
         Then I verify that <replyText> appears on the message trail
-<<<<<<< HEAD:features/05_messages_a.feature
-=======
         And number of replies text updated to "1"
 
     Scenario Outline: Verify a user can't @mention himself in the message
@@ -29,8 +27,6 @@ Feature: Engage -- Messages
         And I do a @mention for "message_block:Approver Testington"
         Then search result should be empty
         
->>>>>>> c573f3c68f2f8c7d62b434e8f6bebcdce4d6e275:features/05_messages.feature
-
     Examples:
             | messageText   | messageTime        | messageAfterTime       | replyText                 |
             | "Test Message"| "a few seconds ago"| "Last Updated Just Now"| "Replying to your message"|
