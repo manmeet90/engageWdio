@@ -5,14 +5,15 @@ Feature: Engage -- Feed
 
     Background:
         Given I visit "fmplogin"
-        And I log in with "lionel.adams@fourth.com" and "Password3"
+        And I log in with "dan.iosif@fourth.com" and "qaz_XSW_12345"
 
     Scenario Outline: Verify generation of new Feed
+    
         When I add a new post "Test Feed"
-        And I do a @mention for "Approver Testington"
+        And I do a @mention for "Buoyee"
         When I click the "Submit" modal button
         Then I verify Feed body to contain <feedText> and last updated Time to be <feedTime>
 
     Examples:
         | feedText                       | feedTime                 |
-        | "Test Feed@Approver Testington"| "Last Updated Just Now"  |
+        | "Test Feed@Buoyee Testington"| "Last Updated Just Now"  |

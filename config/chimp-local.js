@@ -55,7 +55,7 @@ module.exports = {
     baseUrl: 'https://qapartial-fourth-app.cs87.force.com/',
     coloredLogs: true,
     screenshotPath: null,
-    waitforTimeout: 5000,
+    waitforTimeout: 10000,
     waitforInterval: 250
   },
 

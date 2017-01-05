@@ -13,11 +13,9 @@ var MainPage = Object.create(Page, {
   initialNotificationCount: { get: function() { return browser.element('.menu [href="#/app/notifications"] .badge'); } },
   notificationIsExisting: { get: function() { return browser.isExisting('.menu [href="#/app/notifications"] .badge');} },
   // New notification count
-  //notificationCount: { get: function() { return browser.element('[ng-if='notifications.alerts > 0']'); } },
   newNotificationCount: { get: function() { return browser.element('[ng-if="notifications.alerts > 0"]'); } },
 
   //-------- messages element selectors
-  //_addNewMessageButton: { get: function() { return browser.element('.nav-bar-block .right-buttons .button-icon:first-child'); } },
   addNewMessageButton: { get: function() { return browser.element('.icon-uniE90C'); } },
 
   open: { value: function()
