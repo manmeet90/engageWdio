@@ -21,4 +21,8 @@ var MainPage = Object.create(Page, {
   } }
 });
 
+MainPage.selectFileAsAttachment = function(filePath){
+  browser.chooseFile("#postFileField", filePath);
+}
+
 module.exports = MainPage;

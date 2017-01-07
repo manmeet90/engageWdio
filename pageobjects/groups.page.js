@@ -18,14 +18,30 @@ var GroupsPage = Object.create(Page, {
     },
     feedAttachment: {
         get: function() {
-            return browser.element(".feeds .item:first-child .file-thumbnail>img");
+            return browser.element(".feeds .item .file-thumbnail>img");
         }
     },
+    
+    feedElement : {get : function(){
+            return browser.element(".feeds .item");
+    }},
     filePreview: {
         get: function() {
             return browser.element(".media-modal .file-name");
         }
     }
 });
+
+GroupsPage.getFeedAttachmentElement = function(feedElement){
+    return feedElement.element(".file-thumbnail>img");
+};
+
+GroupsPage.getFeedContentNode = function(feedElement){
+    return feedElement.element(".content-text");
+};
+
+GroupsPage.getFeedTimestampNode = function(feedElement){
+    return feedElement.element(".relative-time-element");
+};
 
 module.exports = GroupsPage;

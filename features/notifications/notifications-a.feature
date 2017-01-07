@@ -6,7 +6,7 @@ Feature: Engage -- Notifications
     Background:
         Given I load the QAI environment
         And I log in with QAI MP approver credentials
-@watch
+
     Scenario: Verify generation of new notification
 
         Given I note the current notification count

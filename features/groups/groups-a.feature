@@ -7,8 +7,9 @@ Feature: Engage -- Groups
 
   Background:
     Given I load the QAI environment
-    And I log in with QAI MP user credentials
+    And I log in with QAI MP approver credentials
 
+  @watch
   Scenario Outline: I should be able to add a new Post in Group with attachment
 
     Given I click the "Groups" side panel button

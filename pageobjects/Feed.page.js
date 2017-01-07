@@ -71,9 +71,7 @@ var FeedPage = Object.create(Page, {
 FeedPage.hasFeedNodeWithPost = function(PostText) {
     let selector = `.list p.content-text`;
     let elem = browser.element(selector);
-    let result = elem.getText() == PostText
-        ? true
-        : false;
+    let result = elem.getText() == PostText ? true : false;
     return {elem: elem, result: result};
 };
 
