@@ -1,18 +1,20 @@
 {
-  "name": "engage-chimp-complete-poc",
-  "version": "0.0.1",
+  "name": "engage-wdio",
+  "version": "0.0.2",
   "description": "Slow and steady wins the race!",
-  "main": "chimp --watch",
+  "main": "./node_modules/.bin/chimp --watch",
   "scripts": {
+
     "test": "chimp config/chimp-local.js --watch"
   },
   "repository": {
     "type": "git",
-    "url": "https://voboshi.com/voboshi/engage-chimp-complete-poc.git"
+    "url": "https://github.com/fourth/engage-wdio.git"
   },
   "author": "Fourth App Team",
   "license": "ISC",
   "devDependencies": {
-    "chimp": "^0.44.0"
+    "chimp": "^0.44.0",
+    "xo": "^0.17.1"
   }
 }

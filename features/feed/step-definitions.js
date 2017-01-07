@@ -5,12 +5,11 @@ var FeedPage = require('../../pageobjects/feed.page');
 
 module.exports = function() {
     this.Then(/^I verify Feed body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, function(text, time) {
-        browser.pause(4000); // this should be the actual performance cut off time
-        let result = FeedPage.hasFeedNodeWithPost(text); //.waitForVisible(5000);
+        browser.waitUntil(function () {
+  		      return (FeedPage.lastUpdatedTime === time);
+          });
+        let result = FeedPage.hasFeedNodeWithPost(text);
         expect(result.result).toEqual(true);
-        if(result.result)
-        {
-        expect(FeedPage.lastUpdatedTime.getText()).toEqual(time);
-      }
+        expect(FeedPage.lastUpdatedTime=== (time));
     });
 };

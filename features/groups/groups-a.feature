@@ -6,8 +6,8 @@ Feature: Engage -- Groups
   So that I can direct my communications to specific groups
 
   Background:
-    Given I visit "fmplogin"
-    And I log in with "dan.iosif@fourth.com" and "qaz_XSW_12345"
+    Given I load the QAI environment
+    And I log in with QAI MP user credentials
 
   Scenario Outline: I should be able to add a new Post in Group with attachment
 
@@ -22,5 +22,5 @@ Feature: Engage -- Groups
 
 
     Examples:
-            | fileNameText  |
-            | cat.jpg       |
+            | fileNameText    |
+            | Attachment.jpg  |

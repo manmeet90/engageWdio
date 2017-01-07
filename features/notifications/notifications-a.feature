@@ -4,13 +4,13 @@ Feature: Engage -- Notifications
     So that I can check my notification alerts properly
 
     Background:
-        Given I visit "fmplogin"
-        And I log in with "dan.iosif@fourth.com" and "qaz_XSW_12345"
-
+        Given I load the QAI environment
+        And I log in with QAI MP approver credentials
+@watch
     Scenario: Verify generation of new notification
 
         Given I note the current notification count
         When I add a new post "Text Notification"
-        And I do a @mention for "Buoyee"
+        And I do a @mention for "Approver Testington"
         When I click the "Submit" modal button
         Then I see that count of number of unread notifications increase by 1

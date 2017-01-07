@@ -1,47 +1,26 @@
-// var Page = require('../../pageobjects/page');
-// var MainPage = require('../../pageobjects/main.page');
-// var GroupsPage = require('../../pageobjects/groups.page');
-//
-// var MarketPlaceApp = require('../../pageobjects/marketplace.app');
-//
-// module.exports = function() {
-//     this.Given(/^I visit "([^"]*)"$/, function(text) {
-//         Page.open(text);
-//     });
-//
-//     this.Given(/^I click the "([^"]*)" side panel button$/, function(text) {
-//         MainPage.leftSidePanel.waitForVisible(10000);
-//         MainPage.leftSidePanel.click('*=' + text);
-//     });
-//
-//     this.Given(/^I open the "([^"]*)" Connected App$/, function(text) {
-//         MainPage.firstConnectedApps.waitForVisible();
-//         var ids = MainPage.firstConnectedApps;
-//         var t0 = process.hrtime();
-//         for (var i = 0; i < ids.value.length; i++) {
-//             var element = ids.value[i].ELEMENT;
-//             if (browser.elementIdText(element).value === text) {
-//                 browser.elementIdClick(element);
-//                 break;
-//             }
-//         }
-//
-//         var first_tab = browser.getCurrentTabId();
-//         browser.pause(1000);
-//         var second_tab = browser.getTabIds()[1];
-//         browser.switchTab(second_tab);
-//
-//         MarketPlaceApp.heroContent.waitForVisible();
-//         var t1 = process.hrtime();
-//         console.log(t0, t1, '1000');
-//         // var t0 = performance.now();
-//         // var t1 = performance.now();
-//         // console.log("Opening " + text + " took " + (t1 - t0) + " milliseconds.");
-//     });
-//
-//     this.Given(/^I visit the "([^"]*)" group$/, function(text) {
-//         GroupsPage.groupsList.waitForVisible();
-//         GroupsPage.groupsList.click('=' + text);
-//     });
-//
-// };
+var MainPage = require('../../pageobjects/main.page');
+
+module.exports = function () {
+	this.Given(/^I load the (:?QAI|PROD|PERFDEV|DEV) environment$/, function (environment) {
+		switch (environment.toLowerCase()) {
+			case 'qai':
+				browser.url('https://qapartial-fourth-app.cs87.force.com/fmplogin');
+				break;
+			case 'prod':
+				browser.url('https://secure.fourth.com/fmplogin');
+				break;
+			case 'perfdev':
+				browser.url('https://perfdev-fourth-app.cs89.force.com/fmplogin');
+				break;
+			case 'dev':
+				browser.url('localhost');
+				break;
+		}
+	});
+
+	this.Given(/^I click the "([^"]*)" side panel button$/, function (text) {
+		MainPage.leftSidePanel.waitForVisible();
+		browser.moveToObject('span*=' + text);
+		MainPage.leftSidePanel.click('span*=' + text);
+	});
+};
