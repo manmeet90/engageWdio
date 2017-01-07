@@ -71,14 +71,26 @@ module.exports = function () {
 			SignOutModal.modalButtons.waitForVisible();
 			SignOutModal.modalButtons.click('button*=' + text);
 		} else {
-			AddPostModal.modalHeader.waitForVisible();
-        	for (var i = 0; i < AddPostModal.modalHeader.value.length; i++) {
-            	var element = AddPostModal.modalHeader.value[i].ELEMENT;
-            	if (browser.elementIdText(element).value === text) {
-                	browser.elementIdClick(element);
-                	break;
-            }
-        }
+			switch(text){
+				case  "Cancel": {
+					browser.waitForVisible(".modal .modal-header .secondary-button");
+					browser.waitForVisible(".modal .modal-header .secondary-button").click();
+					break;
+				}
+				case  "Submit": {
+					browser.waitForVisible(".modal .modal-header .primary-button");
+					browser.waitForVisible(".modal .modal-header .primary-button").click();
+					break;
+				}
+			}
+		// 	AddPostModal.modalHeader.waitForVisible();
+        // 	for (var i = 0; i < AddPostModal.modalHeader.value.length; i++) {
+        //     	var element = AddPostModal.modalHeader.value[i].ELEMENT;
+        //     	if (browser.elementIdText(element).value === text) {
+        //         	browser.elementIdClick(element);
+        //         	break;
+        //     }
+        // }
 		}
 	});
 
