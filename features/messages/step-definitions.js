@@ -26,7 +26,7 @@ module.exports = function() {
     });
 
     this.When(/^I click on message$/, function() {
-        if (MessagesPage.messageElement) {
+        if (typeof MessagesPage.messageElement !== 'undefined') {
             MessagesPage.messageElement.click();
         }
     });

@@ -110,21 +110,20 @@ var MessagesPage = Object.create(Page, {
 });
 
 MessagesPage.hasMessageNodeWithMessage = function(messageText) {
-    let selector = `.list p.content-text`;
-    let element = browser.element(selector);
-    let result = element.getText() == messageText
-        ? true
-        : false;
-    return {element: element, result: result};
+    // let selector = `.list p.content-text`;
+    // let element = browser.element(selector);
+    // let result = element.getText() == messageText? true : false;
+    // return {element: element, result: result};
+    //
+    var result = browser.getText('.list p.content-text')[0];
+    return result === messageText ? true : false;
 };
 
 MessagesPage.hasReplyButtonForMessage = function(buttonText) {
     let element = browser.element(".view-container .feeds .item:first-child .comment-counter .subdued");
     element.waitForVisible(2000);
     if (element.value) {
-        return element.getText() === buttonText
-            ? true
-            : false;
+        return element.getText() === buttonText? true : false;
     } else {
         return false;
     }

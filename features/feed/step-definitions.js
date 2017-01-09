@@ -6,10 +6,9 @@ var FeedPage = require('../../pageobjects/feed.page');
 module.exports = function() {
     this.Then(/^I verify Feed body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, function(text, time) {
         browser.waitUntil(function () {
-  		      return (FeedPage.lastUpdatedTime === time);
-          });
+        return browser.getText('.list > .item p.relative-time-element')[0] === time;
+          }, 15000);
         let result = FeedPage.hasFeedNodeWithPost(text);
-        expect(result.result).toEqual(true);
-        expect(FeedPage.lastUpdatedTime=== (time));
+        expect(result).toEqual(true);
     });
 };

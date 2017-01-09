@@ -10,12 +10,7 @@ var FeedPage = Object.create(Page, {
         get: function() {
             return browser.element('.search-people-modal #search-input');
         }
-    }, //try just #search-input
-    // submitModalButton: {
-    //   get: function() {
-    //       return browser.element('.primary-button');
-    //   }
-    // },
+    }, 
     searchResultsList: {
         get: function() {
             return browser.element('.search-people-modal .modal-content');
@@ -33,7 +28,7 @@ var FeedPage = Object.create(Page, {
     },
     lastUpdatedTime: {
         get: function() {
-            return browser.getText('.list > .item:first-child p.relative-time-element');
+            return browser.getText('.list > .item p.relative-time-element')[0];
         }
     },
     messageBodyText: {
@@ -69,10 +64,8 @@ var FeedPage = Object.create(Page, {
 });
 
 FeedPage.hasFeedNodeWithPost = function(PostText) {
-    let selector = `.list p.content-text`;
-    let elem = browser.element(selector);
-    let result = elem.getText() == PostText ? true : false;
-    return {elem: elem, result: result};
+    var result = browser.getText('.list p.content-text')[0];
+    return result === PostText ? true : false;
 };
 
 module.exports = FeedPage;

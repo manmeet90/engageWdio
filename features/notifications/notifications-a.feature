@@ -12,5 +12,5 @@ Feature: Engage -- Notifications
         Given I note the current notification count
         When I add a new post "Text Notification"
         And I do a @mention for "Approver Testington"
-        When I click the "Submit" modal button
+        And I click the "Submit" modal button
         Then I see that count of number of unread notifications increase by 1
