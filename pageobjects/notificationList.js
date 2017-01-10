@@ -17,11 +17,11 @@ var NotificationPage = Object.create(Page, {
 
 NotificationPage.waitForNotificationToUpdate = function(count) {
     let previousCount = parseInt(count) + 1;
-    let notificationCountElement = browser.element('.menu [href="#/app/notifications"] .badge');
-    browser.waitForVisible('.menu [href="#/app/notifications"] .badge');
+    let notificationCountElement = browser.element('.menu [ng-if="notifications.alerts > 0"]');
+    browser.element('.backdrop').waitForVisible(15000, true)
     browser.waitUntil(function() {
-    return parseInt(notificationCountElement.getText().trim()) === parseInt(previousCount);
-    }, 10000);
+        return parseInt(browser.getText('.menu [ng-if="notifications.alerts > 0"]').trim()) === parseInt(previousCount);
+    }, 15000);
 };
 
 module.exports = NotificationPage;

@@ -11,18 +11,19 @@ module.exports = function() {
     this.Given(/^I note the current notification count$/, function() {
 
         MainPage.leftSidePanel.waitForVisible();
-        try{
-          MainPage.NotificationCount.waitForVisible();
-          if (MainPage.notificationIsExisting) {
-              MainPage.count = MainPage.NotificationCount.getText();
-          }
-        }catch(e){
-          // fails means no notification present
-          MainPage.count = 0;
+        try {
+            MainPage.NotificationCount.waitForVisible();
+            if (MainPage.notificationIsExisting) {
+                MainPage.count = MainPage.NotificationCount.getText();
+            }
+        } catch (e) {
+            // fails means no notification present
+            MainPage.count = 0;
         }
-  });
+    });
 
     this.Then(/^I see that count of number of unread notifications increase by 1$/, function() {
+        MainPage.NotificationCount.waitForVisible();
         NotificationPage.waitForNotificationToUpdate(MainPage.count);
         expect(parseInt(MainPage.NotificationCount.getText())).toEqual(parseInt(MainPage.count) + 1);
 

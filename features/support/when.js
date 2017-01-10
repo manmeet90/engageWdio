@@ -70,17 +70,19 @@ module.exports = function() {
         if (text === 'Sign Out' || text === 'Cancel') {
             SignOutModal.modalButtons.waitForVisible();
             SignOutModal.modalButtons.click('button*=' + text);
-        } else {
-            AddPostModal.modalHeader.waitForVisible();
-            for (var i = 0; i < AddPostModal.modalHeader.value.length; i++) {
-                var element = AddPostModal.modalHeader.value[i].ELEMENT;
-                if (browser.elementIdText(element).value === text) {
-                    browser.elementIdClick(element);
-                    break;
-                }
-            }
         }
     });
+
+		this.When(/^I click the "([^"]*)" button$/, function(text) {
+				AddPostModal.modalHeader.waitForVisible();
+						for (var i = 0; i < AddPostModal.modalHeader.value.length; i++) {
+								var element = AddPostModal.modalHeader.value[i].ELEMENT;
+								if (browser.elementIdText(element).value === text) {
+										browser.elementIdClick(element);
+										break;
+								}
+				}
+		});
 
     this.When(/^I check its load performance$/, function() {
         var timing = browser.execute(function() {

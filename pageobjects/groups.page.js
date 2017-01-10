@@ -3,7 +3,7 @@ var Page = require('./page.js');
 var GroupsPage = Object.create(Page, {
     groupsList: {
         get: function() {
-            return browser.elements('.groups .item-complex');
+            return browser.element('.groups .item');
         }
     },
     attachmentIcon: {
@@ -21,7 +21,6 @@ var GroupsPage = Object.create(Page, {
             return browser.element(".feeds .item .file-thumbnail>img");
         }
     },
-    
     feedElement : {get : function(){
             return browser.element(".feeds .item");
     }},

@@ -7,7 +7,7 @@ module.exports = function() {
 
     this.Given(/^I visit the "([^"]*)" group$/, function(text) {
         GroupsPage.groupsList.waitForVisible();
-        GroupsPage.groupsList.click('=' + text);
+        GroupsPage.groupsList.click('div*=' + text);
     });
 
     this.When(/^I click on attachment button$/, function() {
@@ -28,31 +28,11 @@ module.exports = function() {
     this.Then(/^i verify the file name to be "([^"]*)" on the attachment preview page$/, function(fileNameText) {
         if (browser.element('.backdrop').waitForVisible(15000, true)) {
             browser.refresh();
-            let flag = true;
-            setTimeout(function() {
-                if (!flag) {
-                    return;
-                }
-                flag = false;
-                throw new Error("Newly created feed not found on Feeds Page");
-            }, 15000);
-            // This loop will keep finding the first feed element with attachment which has text content and last updated for new feed.
-            while (flag) {
-                GroupsPage.feedElement.waitForVisible();
-                var isFeedContent = GroupsPage.getFeedAttachmentElement(GroupsPage.feedElement).isExisting();
-                if (isFeedContent) {
-                    let text = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText();
-                    let lastUpdateText = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText();
-                    if (text == "Test Feed" && lastUpdateText == "Last Updated Just Now") {
-                        flag = false;
-                        // Got feed Element
-                        GroupsPage.getFeedAttachmentElement(GroupsPage.feedElement).waitForVisible();
-                        GroupsPage.getFeedAttachmentElement(GroupsPage.feedElement).click();
-                        GroupsPage.filePreview.waitForVisible();
-                        expect(GroupsPage.filePreview.getText()).toEqual(fileNameText);
-                    }
-                }
-            }
+            //FIXME following code needs revisiting in future to incoorporate other feed types like Announcements and orders
+            GroupsPage.feedAttachment.waitForVisible();
+            GroupsPage.feedAttachment.click();
+            GroupsPage.filePreview.waitForVisible();
+            expect(GroupsPage.filePreview.getText()).toEqual(fileNameText);
         }
     });
 

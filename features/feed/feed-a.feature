@@ -5,15 +5,15 @@ Feature: Engage -- Feed
 
     Background:
         Given I load the QAI environment
-        And I log in with QAI MP approver credentials
+        And I log in with QAI MP user credentials
 
     Scenario Outline: Verify generation of new Feed
 
         When I add a new post "Test Feed"
-        And I do a @mention for "Buoyee testington"
-        And I click the "Submit" modal button
+        And I do a @mention for "Buyee testington"
+        And I click the "Submit" button
         Then I verify Feed body to contain <feedText> and last updated Time to be <feedTime>
 
     Examples:
-        | feedText                       | feedTime                 |
-        | "Test Feed@Buoyee Testington"  | "Last Updated Just Now"  |
+        | feedText                      | feedTime                 |
+        | "Test Feed@Buyee Testington"  | "Last Updated Just Now"  |

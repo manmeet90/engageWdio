@@ -10,7 +10,7 @@ var MessagesPage = Object.create(Page, {
         get: function() {
             return browser.element('.search-people-modal #search-input');
         }
-    }, //try just #search-input
+    },
     searchResultsList: {
         get: function() {
             return browser.element('.search-people-modal .modal-content');
@@ -66,7 +66,6 @@ var MessagesPage = Object.create(Page, {
             return browser.element(".search-people-modal .modal-content .mention-search");
         }
     },
-
     messageTime: {
         get: function() {
             return browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
@@ -77,19 +76,16 @@ var MessagesPage = Object.create(Page, {
             return browser.element(".view-container .feeds .item:first-child .feed-header");
         }
     },
-
     messageTimestamp: {
         get: function() {
             return browser.element(".view-container .feeds .item:first-child .relative-time-element");
         }
     },
-
     messageContent: {
         get: function() {
             return browser.element(".view-container .feeds .item:first-child .content-text");
         }
     },
-
     numberOfRepliesText: {
         get: function() {
             let element = browser.element(".view-container .feeds .item:first-child .comment-counter>div:last-child .subdued");
@@ -98,7 +94,6 @@ var MessagesPage = Object.create(Page, {
             }
         }
     },
-
     numberOfRepliesTextInMessageDetailsPage: {
         get: function() {
             let element = browser.element(".list .item:first-child .comment-counter>div:last-child .subdued");
@@ -110,11 +105,6 @@ var MessagesPage = Object.create(Page, {
 });
 
 MessagesPage.hasMessageNodeWithMessage = function(messageText) {
-    // let selector = `.list p.content-text`;
-    // let element = browser.element(selector);
-    // let result = element.getText() == messageText? true : false;
-    // return {element: element, result: result};
-    //
     var result = browser.getText('.list p.content-text')[0];
     return result === messageText ? true : false;
 };
@@ -123,7 +113,7 @@ MessagesPage.hasReplyButtonForMessage = function(buttonText) {
     let element = browser.element(".view-container .feeds .item:first-child .comment-counter .subdued");
     element.waitForVisible(2000);
     if (element.value) {
-        return element.getText() === buttonText? true : false;
+        return element.getText() === buttonText ? true : false;
     } else {
         return false;
     }

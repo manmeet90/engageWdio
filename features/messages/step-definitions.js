@@ -8,7 +8,8 @@ var AddPostModal = require('../../pageobjects/addpost.modal');
 module.exports = function() {
 
     this.When(/^I click on Add new message$/, function() {
-        MainPage.addNewMessageButton.waitForVisible();
+        MainPage.addNewMessageButton.waitForExist(5000);
+        MainPage.addNewMessageButton.waitForVisible(5000);
         MainPage.addNewMessageButton.click();
     });
 
@@ -16,13 +17,11 @@ module.exports = function() {
         MessagesPage.messageBox.setValue(messageText);
     });
 
-    this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, function(messageText, messageTime)  {
-
+    this.Then(/^I verify Message body to contain "([^"]*)" and last updated Time to be "([^"]*)"$/, function(messageText, messageTime) {
         if (MessagesPage.messageContent.getText() === messageText) {
-        browser.waitForVisible("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]", 10000);
-        let messageSecTime = browser.element("//p[contains(@class, \"relative-time-element\")][contains(text(), \"a few seconds ago\")]");
-        expect(messageSecTime.getText()).toEqual(messageTime);
-      }
+            MessagesPage.messageTime.waitForVisible(10000);
+            expect(MessagesPage.messageTime.getText()).toEqual(messageTime);
+        }
     });
 
     this.When(/^I click on message$/, function() {
@@ -31,7 +30,7 @@ module.exports = function() {
         }
     });
 
-    this.Then(/^I verify message details in "([^"]*)" and "([^"]*)"$/, function(messageText, messageAfterTime){
+    this.Then(/^I verify message details in "([^"]*)" and "([^"]*)"$/, function(messageText, messageAfterTime) {
         MessagesPage.messageBodyText.waitForVisible(8000);
         expect(MessagesPage.messageBodyText.getText()).toEqual(messageText);
         expect(MessagesPage.lastUpdatedTimeOnMessageDetails.getText()).toEqual(messageAfterTime);
@@ -48,18 +47,21 @@ module.exports = function() {
     });
 
     this.Then(/^I verify message has "([^"]*)" button$/, function(btnText) {
+        MessagesPage.numberOfRepliesText.waitForVisible();
         expect(MessagesPage.hasReplyButtonForMessage(btnText)).toEqual(true);
     });
 
     this.Then(/^message has number of replies text with value "([^"]*)"$/, function(repliesCount) {
-          expect(MessagesPage.numberOfRepliesText.getText()).toEqual(repliesCount);
+        MessagesPage.numberOfRepliesText.waitForVisible();
+        expect(MessagesPage.numberOfRepliesText.getText()).toEqual(repliesCount);
     });
 
     this.Then(/^number of replies text updated to "([^"]*)"$/, function(repliesCount) {
+        MessagesPage.numberOfRepliesTextInMessageDetailsPage.waitForVisible();
         expect(MessagesPage.numberOfRepliesTextInMessageDetailsPage.getText()).toEqual(repliesCount);
     });
 
-    this.Then(/^search result should be empty$/, function(){
-        expect(browser.waitForExist(MessagesPage.emptySearchresult, 2000, true)).toEqual(true);
+    this.Then(/^search result should be empty$/, function() {
+        expect(MessagesPage.emptySearchresult.waitForExist(2000, true)).toEqual(true);
     });
 };

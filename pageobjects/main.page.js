@@ -16,10 +16,9 @@ var MainPage = Object.create(Page, {
             return browser.element('#applications-all-apps');
         }
     },
-
     leftSidePanel: {
         get: function() {
-            return browser.elements('.menu-left .item-complex');
+            return browser.elements('.menu-left .item');
         }
     },
     firstConnectedApps: {
@@ -27,21 +26,19 @@ var MainPage = Object.create(Page, {
             return browser.elements('#applications .menu-no-link');
         }
     },
-
     sidePanelSignOutBtn: {
         get: function() {
             return browser.element('.icon-interface-power');
         }
     },
-
     NotificationCount: {
         get: function() {
-            return browser.element('.menu [href="#/app/notifications"] .badge');
+            return browser.element('.menu [ng-if="notifications.alerts > 0"]');
         }
     },
     notificationIsExisting: {
         get: function() {
-            return browser.isExisting('.menu [href="#/app/notifications"] .badge');
+            return browser.isExisting('.menu [ng-if="notifications.alerts > 0"]');
         }
     },
     addNewMessageButton: {
