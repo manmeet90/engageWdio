@@ -12,7 +12,7 @@ module.exports = function () {
 		var credentials = {
 			qai: {
 				'mp user': {
-					user: 'dan.iosif@fourth.com', pass: 'qaz_XSW_12345'
+					user: 'test.user1@fourth.com', pass: 'Password_001'
 				},
 				'mp approver': {
 					user: 'lionel.adams@fourth.com', pass: 'Password3'
@@ -72,19 +72,19 @@ module.exports = function () {
 		UserMentionPage.mentionSearchResults.click();
         });
 
-				this.When(/^I do a @mention in message for "([^"]*)"$/, function (text) {
-					if (text && text.indexOf('receiver:') !== -1) {
-						let searchText = text.replace('receiver:', '');
-						MessagesPage.searchUserModal.waitForVisible(); // or use MessagesPage.searchBoxInput.waitForVisible()
-						MessagesPage.searchBoxInput.setValue(searchText);
-						MessagesPage.searchResultsList.waitForVisible();
-
-						if (MessagesPage.searchResultTargetUser && MessagesPage.searchResultTargetUser.value)
-						{
-							MessagesPage.searchResultTargetUser.click();
-						}
-					}
-				       });
+		this.When(/^I do a @mention in message for "([^"]*)"$/, function (text) {
+			if (text && text.indexOf('receiver:') !== -1) {
+				let searchText = text.replace('receiver:', '');
+				MessagesPage.searchUserModal.waitForVisible(); // or use MessagesPage.searchBoxInput.waitForVisible()
+				MessagesPage.searchBoxInput.setValue(searchText);
+				MessagesPage.searchResultsList.waitForVisible();
+				MessagesPage.searchResultTargetUser.waitForVisible();
+				if (MessagesPage.searchResultTargetUser && MessagesPage.searchResultTargetUser.value)
+				{
+					MessagesPage.searchResultTargetUser.click();
+				}
+			}
+		});
 	// this.When(/^I do a @mention for "([^"]*)"$/, function (text) {
   //       // TODO: Change receiver: to be a Persona-style thing.
 	// 	if (text && text.indexOf('receiver:') !== -1) {

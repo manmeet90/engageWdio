@@ -5,7 +5,7 @@ Feature: Engage -- Messages
 
     Background:
         Given I load the QAI environment
-        And I log in with QAI MP approver credentials
+        And I log in with QAI MP user credentials
         And I click the "Messages" side panel button
 
     Scenario: Verify a user can't @mention himself in the message
@@ -15,7 +15,7 @@ Feature: Engage -- Messages
 @watch
     Scenario Outline: Verify generation of reply on new message
         When I click on Add new message
-        And I do a @mention in message for "receiver:Buyee Testington"
+        And I do a @mention in message for "receiver:User Test10"
         And I write <messageText> in the message body
         And I click the "Submit" button
         And I click on message

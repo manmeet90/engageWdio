@@ -27,9 +27,14 @@ module.exports = function() {
     });
 
     this.When(/^I click on message$/, function() {
-		browser.waitUntil(function() {
-    		return browser.getText('.message-element .relative-time-element')[0] === 'a few seconds ago';
-		}, 15000);
+        // browser.waitForVisible(".feeds .item");
+		// browser.waitUntil(function() {
+        //     // console.log(browser.getText('.item:first-child .relative-time-element').value);
+        //     var timestampText = browser.getText('.item:first-child .relative-time-element');
+        //     console.log(timestampText);
+    	// 	return timestampText === 'a few seconds ago';
+		// }, 20000);
+        MessagesPage.messageTime.waitForVisible();
         if (typeof MessagesPage.messageElement !== 'undefined') {
             MessagesPage.messageElement.click();
         }

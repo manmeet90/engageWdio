@@ -18,7 +18,7 @@ var MessagesPage = Object.create(Page, {
     },
     searchResultTargetUser: {
         get: function() {
-            return browser.element('.search-people-modal .mention-search:first-child');
+            return browser.element('.search-people-modal .mention-search');
         }
     },
     messageBox: {
@@ -43,7 +43,7 @@ var MessagesPage = Object.create(Page, {
     },
     messageElement: {
         get: function() {
-            return browser.element('.list .item:first-child');
+            return browser.element('.list .item');
         }
     }, // FIXME: can be done ina better way in future check with Team n devs
     messageTextArea: {
