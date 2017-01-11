@@ -7,14 +7,15 @@ Feature: Engage -- Messages
         Given I load the QAI environment
         And I log in with QAI MP approver credentials
         And I click the "Messages" side panel button
-        When I click on Add new message
 
     Scenario: Verify a user can't @mention himself in the message
-        And I do a @mention for "receiver:Approver Testington"
+        When I click on Add new message
+        And I do a @mention in message for "receiver:Approver"
         Then search result should be empty
-
+@watch
     Scenario Outline: Verify generation of reply on new message
-        And I do a @mention for "receiver:Approver Testington"
+        When I click on Add new message
+        And I do a @mention in message for "receiver:Buyee Testington"
         And I write <messageText> in the message body
         And I click the "Submit" button
         And I click on message
@@ -28,7 +29,8 @@ Feature: Engage -- Messages
               | "Test Message" | "a few seconds ago" | "Last Updated Just Now" | "Replying to your message" |
 
     Scenario Outline: Verify generation of a new message
-        And I do a @mention for "receiver:Buyee"
+        When I click on Add new message
+        And I do a @mention in message for "receiver:Buyee"
         And I write <messageText> in the message body
         And I click the "Submit" button
         Then I verify Message body to contain <messageText> and last updated Time to be <messageTime>

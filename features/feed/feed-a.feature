@@ -10,7 +10,7 @@ Feature: Engage -- Feed
     Scenario Outline: Verify generation of new Feed
 
         When I add a new post "Test Feed"
-        And I do a @mention for "Buyee testington"
+        And I do a @mention in feed for "Buyee testington"
         And I click the "Submit" button
         Then I verify Feed body to contain <feedText> and last updated Time to be <feedTime>
 

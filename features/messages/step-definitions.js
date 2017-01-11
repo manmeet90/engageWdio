@@ -8,12 +8,14 @@ var AddPostModal = require('../../pageobjects/addpost.modal');
 module.exports = function() {
 
     this.When(/^I click on Add new message$/, function() {
-        MainPage.addNewMessageButton.waitForExist(5000);
-        MainPage.addNewMessageButton.waitForVisible(5000);
+        //MainPage.addNewMessageButton.waitForExist();
+        browser.waitForExist('.click-block-hide');
+        MainPage.addNewMessageButton.waitForVisible();
         MainPage.addNewMessageButton.click();
     });
 
     this.When(/^I write "([^"]*)" in the message body$/, function(messageText) {
+		MessagesPage.messageBox.waitForVisible();
         MessagesPage.messageBox.setValue(messageText);
     });
 
@@ -25,6 +27,9 @@ module.exports = function() {
     });
 
     this.When(/^I click on message$/, function() {
+		browser.waitUntil(function() {
+    		return browser.getText('.message-element .relative-time-element')[0] === 'a few seconds ago';
+		}, 15000);
         if (typeof MessagesPage.messageElement !== 'undefined') {
             MessagesPage.messageElement.click();
         }

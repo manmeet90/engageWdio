@@ -10,5 +10,7 @@ module.exports = function() {
 }, 15000);
         let result = FeedPage.hasFeedNodeWithPost(text);
         expect(result).toBeTruthy();
+        expect(FeedPage.lastUpdatedTime).toEqual(time);
+
     });
 };

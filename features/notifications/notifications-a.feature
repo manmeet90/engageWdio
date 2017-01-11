@@ -10,6 +10,6 @@ Feature: Engage -- Notifications
     Scenario: Verify generation of new notification
         Given I note the current notification count
         When I add a new post "Text Notification"
-        And I do a @mention for "Buyee"
+        And I do a @mention in feed for "Buyee"
         And I click the "Submit" button
         Then I see that count of number of unread notifications increase by 1
