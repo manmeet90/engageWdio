@@ -55,12 +55,15 @@ module.exports = function() {
     });
 
     this.Then(/^I verify message has "([^"]*)" button$/, function(btnText) {
-        MessagesPage.numberOfRepliesText.waitForVisible();
+        // MessagesPage.messageElement.waitForVisible();
+
         expect(MessagesPage.hasReplyButtonForMessage(btnText)).toEqual(true);
     });
 
     this.Then(/^message has number of replies text with value "([^"]*)"$/, function(repliesCount) {
-        MessagesPage.numberOfRepliesText.waitForVisible();
+        // MessagesPage.numberOfRepliesText.waitForVisible();
+        // this is required since running the whole test suite together results into replied message timestamp also to "few seconds ago"
+        browser.pause(5000);
         expect(MessagesPage.numberOfRepliesText.getText()).toEqual(repliesCount);
     });
 

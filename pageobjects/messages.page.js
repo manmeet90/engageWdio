@@ -43,7 +43,7 @@ var MessagesPage = Object.create(Page, {
     },
     messageElement: {
         get: function() {
-            return browser.element('.list .item:first-child');
+            return browser.element('.menu-content .pane[nav-view="active"] .list .item:first-child');
         }
     }, // FIXME: can be done ina better way in future check with Team n devs
     messageTextArea: {
@@ -88,7 +88,7 @@ var MessagesPage = Object.create(Page, {
     },
     numberOfRepliesText: {
         get: function() {
-            let element = browser.element(".view-container .feeds .item:first-child .comment-counter>div:last-child .subdued");
+            let element = browser.element(".menu-content .pane[nav-view='active'] .feeds .item:first-child .comment-counter>div:last-child .subdued");
             if (element) {
                 return element;
             }
@@ -96,7 +96,7 @@ var MessagesPage = Object.create(Page, {
     },
     numberOfRepliesTextInMessageDetailsPage: {
         get: function() {
-            let element = browser.element(".list .item:first-child .comment-counter>div:last-child .subdued");
+            let element = browser.element(".menu-content .pane[nav-view='active'] .list .item:first-child .comment-counter>div:last-child .subdued");
             if (element) {
                 return element;
             }
@@ -110,8 +110,8 @@ MessagesPage.hasMessageNodeWithMessage = function(messageText) {
 };
 
 MessagesPage.hasReplyButtonForMessage = function(buttonText) {
-    let element = browser.element(".view-container .feeds .item:first-child .comment-counter .subdued");
-    element.waitForVisible(2000);
+    let element = browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child .comment-counter .subdued");
+    element.waitForVisible(20000);
     if (element.value) {
         return element.getText() === buttonText ? true : false;
     } else {

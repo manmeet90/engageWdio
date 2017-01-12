@@ -7,11 +7,12 @@ Feature: Engage -- Messages
         Given I load the QAI environment
         And I log in with QAI MP user credentials
         And I click the "Messages" side panel button
-
+    @watch
     Scenario: Verify a user can't @mention himself in the message
         When I click on Add new message
         And I do a @mention in message for "receiver:test4 user"
         Then search result should be empty
+
     @watch    
     Scenario Outline: Verify generation of reply on new message
         When I click on Add new message

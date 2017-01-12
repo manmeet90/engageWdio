@@ -12,7 +12,7 @@ module.exports = function () {
 		var credentials = {
 			qai: {
 				'mp user': {
-					user: 'test.user4@fourth.com', pass: 'Password_004'
+					user: 'test.user12@fourth.com', pass: 'Password_012'
 				},
 				'mp approver': {
 					user: 'lionel.adams@fourth.com', pass: 'Password3'
