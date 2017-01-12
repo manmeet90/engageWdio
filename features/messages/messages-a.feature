@@ -10,9 +10,9 @@ Feature: Engage -- Messages
 
     Scenario: Verify a user can't @mention himself in the message
         When I click on Add new message
-        And I do a @mention in message for "receiver:Approver"
+        And I do a @mention in message for "receiver:test4 user"
         Then search result should be empty
-@watch
+    @watch    
     Scenario Outline: Verify generation of reply on new message
         When I click on Add new message
         And I do a @mention in message for "receiver:User Test10"
@@ -27,10 +27,10 @@ Feature: Engage -- Messages
     Examples:
               | messageText    | messageTime         | messageAfterTime        | replyText                  |
               | "Test Message" | "a few seconds ago" | "Last Updated Just Now" | "Replying to your message" |
-
+   @watch
     Scenario Outline: Verify generation of a new message
         When I click on Add new message
-        And I do a @mention in message for "receiver:Buyee"
+        And I do a @mention in message for "receiver:User Test10"
         And I write <messageText> in the message body
         And I click the "Submit" button
         Then I verify Message body to contain <messageText> and last updated Time to be <messageTime>

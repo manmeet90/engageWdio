@@ -12,7 +12,7 @@ module.exports = function () {
 		var credentials = {
 			qai: {
 				'mp user': {
-					user: 'test.user1@fourth.com', pass: 'Password_001'
+					user: 'test.user4@fourth.com', pass: 'Password_004'
 				},
 				'mp approver': {
 					user: 'lionel.adams@fourth.com', pass: 'Password3'
@@ -78,11 +78,16 @@ module.exports = function () {
 				MessagesPage.searchUserModal.waitForVisible(); // or use MessagesPage.searchBoxInput.waitForVisible()
 				MessagesPage.searchBoxInput.setValue(searchText);
 				MessagesPage.searchResultsList.waitForVisible();
-				MessagesPage.searchResultTargetUser.waitForVisible();
-				if (MessagesPage.searchResultTargetUser && MessagesPage.searchResultTargetUser.value)
-				{
-					MessagesPage.searchResultTargetUser.click();
+				try{
+					MessagesPage.searchResultTargetUser.waitForVisible();
+					if (MessagesPage.searchResultTargetUser && MessagesPage.searchResultTargetUser.value)
+					{
+						MessagesPage.searchResultTargetUser.click();
+					}
+				}catch(e){
+					console.log("Expected user in Search Result not found.");
 				}
+				
 			}
 		});
 	// this.When(/^I do a @mention for "([^"]*)"$/, function (text) {

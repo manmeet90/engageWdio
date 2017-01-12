@@ -4,7 +4,8 @@
   "description": "Slow and steady wins the race!",
   "main": "./node_modules/.bin/chimp --watch",
   "scripts": {
-    "test": "xo && ./node_modules/.bin/chimp config/chimp-local.js --watch"
+    "test": "xo && ./node_modules/.bin/chimp config/chimp-local.js --watch",
+    "mtest" : "chimp config/chimp-local.js --watch"
   },
   "repository": {
     "type": "git",

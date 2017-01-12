@@ -43,7 +43,7 @@ var MessagesPage = Object.create(Page, {
     },
     messageElement: {
         get: function() {
-            return browser.element('.list .item');
+            return browser.element('.list .item:first-child');
         }
     }, // FIXME: can be done ina better way in future check with Team n devs
     messageTextArea: {

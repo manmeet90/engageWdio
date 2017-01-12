@@ -27,14 +27,12 @@ module.exports = function() {
     });
 
     this.When(/^I click on message$/, function() {
-        // browser.waitForVisible(".feeds .item");
-		// browser.waitUntil(function() {
-        //     // console.log(browser.getText('.item:first-child .relative-time-element').value);
-        //     var timestampText = browser.getText('.item:first-child .relative-time-element');
-        //     console.log(timestampText);
-    	// 	return timestampText === 'a few seconds ago';
-		// }, 20000);
-        MessagesPage.messageTime.waitForVisible();
+		browser.waitUntil(function() {
+            var timestampText = browser.getText('.item:first-child .relative-time-element');
+            // console.log(timestampText);
+    		return timestampText.indexOf('a few seconds ago')!=-1;
+		}, 20000);
+        // MessagesPage.messageTime.waitForExist(15000);
         if (typeof MessagesPage.messageElement !== 'undefined') {
             MessagesPage.messageElement.click();
         }
@@ -72,6 +70,6 @@ module.exports = function() {
     });
 
     this.Then(/^search result should be empty$/, function() {
-        expect(MessagesPage.emptySearchresult.waitForExist(2000, true)).toEqual(true);
+        expect(MessagesPage.emptySearchresult.waitForExist(5000, true)).toEqual(true);
     });
 };
