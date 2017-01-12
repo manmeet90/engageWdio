@@ -43,7 +43,7 @@ var MessagesPage = Object.create(Page, {
     },
     messageElement: {
         get: function() {
-            return browser.element('.list .item:first-child');
+        return browser.element('.list .item:first-child');
         }
     }, // FIXME: can be done ina better way in future check with Team n devs
     messageTextArea: {
@@ -83,7 +83,7 @@ var MessagesPage = Object.create(Page, {
     },
     messageContent: {
         get: function() {
-            return browser.element(".view-container .feeds .item:first-child .content-text");
+            return browser.elements(".view-container .feeds .item:first-child .content-text")[0];
         }
     },
     numberOfRepliesText: {

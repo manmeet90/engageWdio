@@ -9,17 +9,18 @@ Feature: Engage -- Messages
         And I click the "Messages" side panel button
 
     Scenario: Verify a user can't @mention himself in the message
-        When I click on Add new message
-        And I do a @mention in message for "receiver:test4 user"
+        Given I click on Add new message
+        When I do a @mention in message for "receiver:Buyee"
         Then search result should be empty
-    @watch    
+
     Scenario Outline: Verify generation of reply on new message
-        When I click on Add new message
-        And I do a @mention in message for "receiver:User Test10"
+        Given I click on Add new message
+        And I do a @mention in message for "receiver:Approver Testington"
         And I write <messageText> in the message body
         And I click the "Submit" button
+        And message has number of replies text with value "0"
         And I click on message
-        And I add <replyText>
+        When I add <replyText>
         And I click on "Post" button
         Then I verify that <replyText> appears on the message trail
         And number of replies text updated to "1"
@@ -27,15 +28,12 @@ Feature: Engage -- Messages
     Examples:
               | messageText    | messageTime         | messageAfterTime        | replyText                  |
               | "Test Message" | "a few seconds ago" | "Last Updated Just Now" | "Replying to your message" |
-   @watch
+@watch
     Scenario Outline: Verify generation of a new message
-        When I click on Add new message
-        And I do a @mention in message for "receiver:User Test10"
-        And I write <messageText> in the message body
+        Given I click on Add new message
+        And I do a @mention in message for "receiver:Approver Testington"
+        When I write <messageText> in the message body
         And I click the "Submit" button
-        Then I verify Message body to contain <messageText> and last updated Time to be <messageTime>
-        And I verify message has "Reply" button
-        And message has number of replies text with value "0"
         And I click on message
         Then I verify message details in <messageText> and <messageAfterTime>
 
