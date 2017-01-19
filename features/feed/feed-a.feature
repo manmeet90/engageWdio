@@ -5,7 +5,7 @@ Feature: Engage -- Feed
 
     Background:
         Given I load the QAI environment
-        And I log in with QAI MP user credentials
+        And I log in with QAI MP approver credentials
 
     Scenario Outline: Verify generation of new Feed
 

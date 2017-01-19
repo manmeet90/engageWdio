@@ -28,7 +28,7 @@ Feature: Engage -- Messages
     Examples:
               | messageText    | messageTime         | messageAfterTime        | replyText                  |
               | "Test Message" | "a few seconds ago" | "Last Updated Just Now" | "Replying to your message" |
-@watch
+
     Scenario Outline: Verify generation of a new message
         Given I click on Add new message
         And I do a @mention in message for "receiver:Approver Testington"
