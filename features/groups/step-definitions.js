@@ -36,4 +36,58 @@ module.exports = function() {
         }
     });
 
+    this.Then(/^refresh the feed page$/, function(){
+        browser.refresh();
+        GroupsPage.feeds.waitForVisible();
+        GroupsPage.feedElement.click();
+    });
+
+    this.When(/^I click on Like button$/, function(){
+        GroupsPage.groupFeedDetailElement.waitForVisible();
+        GroupsPage.groupFeedDetailElementLikeButton.click();
+    });
+
+    this.When(/^I verify that number of likes on the post become ([^"]*)$/, function(likesCount){
+        browser.waitUntil(function(){
+            return GroupsPage.groupFeedDetailElementLikeButtonText === "liked";
+        });
+        var numberOfLikes = GroupsPage.groupFeedDetailElementLikesCountElement.getText();
+        expect(numberOfLikes).toEqual(likesCount);
+    });
+
+    this.When(/^I click on delete button$/, function(){
+        GroupsPage.groupFeedDetailElementDeleteButton.waitForVisible();
+        GroupsPage.groupFeedDetailElementDeleteButton.click();
+    });
+
+    this.When(/^I confirm the deletion$/, function(){
+        GroupsPage.DeletePostModalButtons.waitForVisible();
+        GroupsPage.DeletePostModalButtons.click("button*=Delete");
+    });
+
+    this.Then(/^I verify that post is successfully deleted from the feed trail$/, function(){
+        GroupsPage.feeds.waitForVisible();
+        
+        var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now" ? true : false;
+        var feedTextContentMatched = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText().toLowerCase() == "test feed" ? true : false;
+        if(feedTimeMatched){ // when all tests run together feedTime may match but feed content should not matched
+            if(!feedTextContentMatched){
+                expect(true).toEqual(true);
+            }
+        }else if(!feedTextContentMatched && !feedTimeMatched){ // when scenario for delete feed test ran alone neither feedtime nor feedtext should match
+            expect(true).toEqual(true);
+        }else{
+            expect(true).toEqual(false);
+        }
+    });
+
+    
+
+    
+
+    
+
+    
+    
+
 };

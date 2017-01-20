@@ -21,9 +21,36 @@ var GroupsPage = Object.create(Page, {
             return browser.element(".feeds .item .file-thumbnail>img");
         }
     },
+    feeds : {
+        get : function(){
+            return browser.elements(".menu-content .pane[nav-view='active'] .feeds .list .item");
+        }
+    },
     feedElement : {get : function(){
-            return browser.element(".feeds .item");
+            return browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child");
     }},
+    groupFeedDetailElement :{get: function(){
+        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item");
+    }},
+    groupFeedDetailElementLikeButton :{get: function(){
+        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
+    }},
+    groupFeedDetailElementLikeButtonText :{get: function(){
+        return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child .subdued");
+    }},
+    groupFeedDetailElementLikesCountElement :{get: function(){
+        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:first-child .subdued");
+    }},
+    groupFeedDetailElementDeleteButton : {
+        get : function(){
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='delete_access']");
+        }
+    },
+    DeletePostModalButtons : {
+        get : function(){
+            return browser.elements(".popup-buttons button");
+        }
+    },
     filePreview: {
         get: function() {
             return browser.element(".media-modal .file-name");

@@ -8,29 +8,20 @@ Feature: Engage -- Groups
         And I log in with QAI MP user credentials
         And I click the "Groups" side panel button
         And I visit the "TS_QAI" group
-
+    
+    @watch
     Scenario: I should be able to like a group post
         Given I add a new post "Group Feed"
         And I click the "Submit" button
+        Then refresh the feed page
         When I click on Like button
         Then I verify that number of likes on the post become 1
-
-    Scenario Outline: I should be able to edit a group post
-        Given I add a new post "Group Feed"
-        And I click the "Submit" button
-        When I edit the feed text to <EditedGroupFeedText>
-        Then I verify that feed text change to <EditedGroupFeedText>
-
-    Scenario: I should be able to reply a group post
-        Given I add a new post "Test Feed"
-        And I click the "Submit" button
-        When I add <replyText> in the reply section
-        Then I verify that <replyText> appears on the feed trail
-        And number of replies text updated to "1"
-
+    
+    @watch
     Scenario: I should be able to delete a group post
         Given I add a new post "Test Feed"
         And I click the "Submit" button
+        Then refresh the feed page
         When I click on delete button
         And I confirm the deletion
         Then I verify that post is successfully deleted from the feed trail
@@ -46,7 +37,7 @@ Feature: Engage -- Groups
           When I click on "Can not delete this Feed" post
           Then I verify that delete option is unavailable
 
-    Scenario: I should be able to see chatter feed and Announcements as Group posts
+    Scenario Outline: I should be able to see chatter feed and Announcements as Group posts
           Given I add a new post "Chatter Feed present in group post"
           When I click the "Submit" button
           Then I verify "Chatter Feed present in group post" appears in the group post
@@ -56,3 +47,5 @@ Feature: Engage -- Groups
         Examples:
             | EditedGroupFeedText    | replyText           | Announcement1 |
             | Edited Group Feed Text | reply to group post | Announcement1 |
+
+    
