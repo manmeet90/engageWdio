@@ -5,7 +5,7 @@ Feature: Engage -- Groups
 
     Background:
         Given I load the QAI environment
-        And I log in with QAI MP user credentials
+        And I log in with QAI MP approver credentials
         And I click the "Groups" side panel button
         And I visit the "TS_QAI" group
     
@@ -16,6 +16,24 @@ Feature: Engage -- Groups
         Then refresh the feed page
         When I click on Like button
         Then I verify that number of likes on the post become 1
+
+    @watch
+    Scenario: I should be able to edit a group post
+        Given I add a new post "Group Feed"
+        And I click the "Submit" button
+        Then refresh the feed page
+        When I edit the feed text to "Edited Group Feed Text"
+        And I click the "Submit" button
+        Then I verify that feed text change to "Edited Group Feed Text"
+
+    @watch
+    Scenario: I should be able to reply a group post
+        Given I add a new post "Test Feed"
+        And I click the "Submit" button
+        Then refresh the feed page
+        When I add "reply to group post" in the reply section
+        Then I verify that "reply to group post" appears on the feed trail
+        And number of replies text to post updated to "1"
     
     @watch
     Scenario: I should be able to delete a group post
@@ -43,9 +61,8 @@ Feature: Engage -- Groups
           Then I verify "Chatter Feed present in group post" appears in the group post
           And I verify <Announcement1> is also present in the group post
 
-
-        Examples:
-            | EditedGroupFeedText    | replyText           | Announcement1 |
-            | Edited Group Feed Text | reply to group post | Announcement1 |
+    Examples:
+              | EditedGroupFeedText       | replyText              | Announcement1   |
+              | "Edited Group Feed Text"  | "reply to group post" | "Announcement1" |
 
     

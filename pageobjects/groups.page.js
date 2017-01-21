@@ -32,6 +32,9 @@ var GroupsPage = Object.create(Page, {
     groupFeedDetailElement :{get: function(){
         return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item");
     }},
+    groupFeedDetailElementContent :{get: function(){
+        return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item .content-text");
+    }},
     groupFeedDetailElementLikeButton :{get: function(){
         return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
     }},
@@ -41,9 +44,17 @@ var GroupsPage = Object.create(Page, {
     groupFeedDetailElementLikesCountElement :{get: function(){
         return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:first-child .subdued");
     }},
+    groupFeedDetailElementRepliesCountElement :{get: function(){
+        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:last-child .subdued");
+    }},
     groupFeedDetailElementDeleteButton : {
         get : function(){
             return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='delete_access']");
+        }
+    },
+    groupFeedDetailElementEditButton: {
+        get : function(){
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='edit_access']");
         }
     },
     DeletePostModalButtons : {
@@ -55,7 +66,33 @@ var GroupsPage = Object.create(Page, {
         get: function() {
             return browser.element(".media-modal .file-name");
         }
+    },
+    addPostTextArea : {
+        get : function(){
+            return browser.element(".modal-add-post .feed-text-area");
+        }   
+    },
+    feedReplyTextBox : {
+        get : function(){
+            return browser.element(".comment-footer .feed-text-area");
+        }
+    },
+    feedReplyPostButton : {
+        get : function(){
+            return browser.element(".comment-footer button.primary-button");
+        }
+    },
+    feedReplyCommentPost : {
+        get : function(){
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .comment-item");
+        }
+    },
+    feedReplyCommentPostContent : {
+        get : function(){
+            return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .comment-item header>div:first-child>p:last-child");
+        }
     }
+    
 });
 
 GroupsPage.getFeedAttachmentElement = function(feedElement){

@@ -81,13 +81,35 @@ module.exports = function() {
         }
     });
 
-    
+    this.When(/^I edit the feed text to "([^"]*)"$/, function(editedGroupFeedText){
+        GroupsPage.groupFeedDetailElementEditButton.waitForVisible();
+        GroupsPage.groupFeedDetailElementEditButton.click();
 
+        GroupsPage.addPostTextArea.waitForVisible();
+        GroupsPage.addPostTextArea.setValue(editedGroupFeedText);
+    });
     
+    this.When(/^I verify that feed text change to "([^"]*)"$/, function(editedGroupFeedText){
+        browser.waitUntil(function(){
+            return (GroupsPage.groupFeedDetailElementContent == editedGroupFeedText);
+        });
+    });
 
-    
+    this.When(/^I add "([^"]*)" in the reply section$/, function(replyText){
+        GroupsPage.feedReplyTextBox.waitForVisible();
+        GroupsPage.feedReplyTextBox.setValue(replyText);
+        GroupsPage.feedReplyPostButton.click();
+    });
 
+    this.Then(/^I verify that "([^"]*)" appears on the feed trail$/, function(replyText){
+        GroupsPage.feedReplyCommentPost.waitForVisible();
+        expect(GroupsPage.feedReplyCommentPostContent).toEqual(replyText);
+    });
     
+    this.Then(/^number of replies text to post updated to "([^"]*)"$/, function(repliesCount){
+        expect(GroupsPage.groupFeedDetailElementRepliesCountElement.getText()).toEqual(repliesCount);
+    });
+     
     
 
 };
