@@ -36,76 +36,85 @@ module.exports = function() {
         }
     });
 
-    this.Given(/^I refresh the feed page$/, function(){
+    this.Given(/^I refresh the feed page$/, function() {
         browser.refresh();
         GroupsPage.feeds.waitForVisible();
         GroupsPage.feedElement.click();
     });
 
-    this.When(/^I click on Like button$/, function(){
+    this.When(/^I click on Like button$/, function() {
         GroupsPage.groupFeedDetailElement.waitForVisible();
         GroupsPage.groupFeedDetailElementLikeButton.click();
     });
 
-    this.When(/^I verify that number of likes on the post become ([^"]*)$/, function(likesCount){
-        browser.waitUntil(function(){
+    this.When(/^I verify that number of likes on the post become ([^"]*)$/, function(likesCount) {
+        browser.waitUntil(function() {
             return GroupsPage.groupFeedDetailElementLikeButtonText === "liked";
         });
         var numberOfLikes = GroupsPage.groupFeedDetailElementLikesCountElement.getText();
         expect(numberOfLikes).toEqual(likesCount);
     });
 
-    this.When(/^I click on delete button$/, function(){
+    this.When(/^I click on delete button$/, function() {
         GroupsPage.groupFeedDetailElementDeleteButton.waitForVisible();
         GroupsPage.groupFeedDetailElementDeleteButton.click();
     });
 
-    this.When(/^I confirm the deletion$/, function(){
+    this.When(/^I confirm the deletion$/, function() {
         GroupsPage.DeletePostModalButtons.waitForVisible();
         GroupsPage.DeletePostModalButtons.click("button*=Delete");
     });
 
-    this.Then(/^I verify that post is successfully deleted from the feed trail$/, function(){
+    this.Then(/^I verify that post is successfully deleted from the feed trail$/, function() {
         GroupsPage.feeds.waitForVisible();
-        var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now" ? true : false;
+        var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now"? true : false;
         var feedTextContentMatched = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText().toLowerCase() == "test feed" ? true : false;
-        if(feedTimeMatched){ // when all tests run together feedTime may match but feed content should not match
-            if(!feedTextContentMatched){
+        if (feedTimeMatched) { // when all tests run together feedTime may match but feed content should not match
+            if (!feedTextContentMatched) {
                 expect(true).toEqual(true);
             }
-        }else if(!feedTextContentMatched && !feedTimeMatched){ // when scenario for delete feed test ran alone neither feedtime nor feedtext should match
+        } else if (!feedTextContentMatched && !feedTimeMatched) { // when scenario for delete feed test ran alone neither feedtime nor feedtext should match
             expect(true).toEqual(true);
-        }else{
+        } else {
             expect(true).toEqual(false);
         }
     });
 
-    this.When(/^I edit the feed text to "([^"]*)"$/, function(editedGroupFeedText){
+    this.When(/^I edit the feed text to "([^"]*)"$/, function(editedGroupFeedText) {
         GroupsPage.groupFeedDetailElementEditButton.waitForVisible();
         GroupsPage.groupFeedDetailElementEditButton.click();
         GroupsPage.addPostTextArea.waitForVisible();
         GroupsPage.addPostTextArea.setValue(editedGroupFeedText);
     });
 
-    this.When(/^I verify that feed text change to "([^"]*)"$/, function(editedGroupFeedText){
-        browser.waitUntil(function(){
+    this.When(/^I verify that feed text change to "([^"]*)"$/, function(editedGroupFeedText) {
+        browser.waitUntil(function() {
             return (GroupsPage.groupFeedDetailElementContent == editedGroupFeedText);
         });
     });
 
-    this.When(/^I add "([^"]*)" in the reply section$/, function(replyText){
+    this.When(/^I add "([^"]*)" in the reply section$/, function(replyText) {
         GroupsPage.feedReplyTextBox.waitForVisible();
         GroupsPage.feedReplyTextBox.setValue(replyText);
         GroupsPage.feedReplyPostButton.click();
     });
 
-    this.Then(/^I verify that "([^"]*)" appears on the feed trail$/, function(replyText){
+    this.Then(/^I verify that "([^"]*)" appears on the feed trail$/, function(replyText) {
         GroupsPage.feedReplyCommentPost.waitForVisible();
         expect(GroupsPage.feedReplyCommentPostContent).toEqual(replyText);
     });
 
-    this.Then(/^number of replies text to post updated to "([^"]*)"$/, function(repliesCount){
+    this.Then(/^number of replies text to post updated to "([^"]*)"$/, function(repliesCount) {
         expect(GroupsPage.groupFeedDetailElementRepliesCountElement.getText()).toEqual(repliesCount);
     });
+    
+    this.When(/^I click on "([^"]*)" post$/, function(arg1) {
+      GroupsPage.feeds.waitForVisible();
+      GroupsPage.feedElement.click();
+    });
 
+    this.Then(/^I verify that delete option is unavailable$/, function() {
+      GroupsPage.feedReplyPostButton.waitForVisible();
+      expect(GroupsPage.groupFeedDetailElementDeleteButton.waitForExist(2000, true)).toEqual(true);
+    });
 };
