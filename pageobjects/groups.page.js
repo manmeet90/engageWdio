@@ -21,44 +21,58 @@ var GroupsPage = Object.create(Page, {
             return browser.element(".feeds .item .file-thumbnail>img");
         }
     },
-    feeds : {
-        get : function(){
+    feeds: {
+        get: function() {
             return browser.elements(".menu-content .pane[nav-view='active'] .feeds .list .item");
         }
     },
-    feedElement : {get : function(){
+    feedElement: {
+        get: function() {
             return browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child");
-    }},
-    groupFeedDetailElement :{get: function(){
-        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item");
-    }},
-    groupFeedDetailElementContent :{get: function(){
-        return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item .content-text");
-    }},
-    groupFeedDetailElementLikeButton :{get: function(){
-        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
-    }},
-    groupFeedDetailElementLikeButtonText :{get: function(){
-        return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child .subdued");
-    }},
-    groupFeedDetailElementLikesCountElement :{get: function(){
-        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:first-child .subdued");
-    }},
-    groupFeedDetailElementRepliesCountElement :{get: function(){
-        return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:last-child .subdued");
-    }},
-    groupFeedDetailElementDeleteButton : {
-        get : function(){
+        }
+    },
+    groupFeedDetailElement: {
+        get: function() {
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item");
+        }
+    },
+    groupFeedDetailElementContent: {
+        get: function() {
+            return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item .content-text");
+        }
+    },
+    groupFeedDetailElementLikeButton: {
+        get: function() {
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
+        }
+    },
+    groupFeedDetailElementLikeButtonText: {
+        get: function() {
+            return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child .subdued");
+        }
+    },
+    groupFeedDetailElementLikesCountElement: {
+        get: function() {
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:first-child .subdued");
+        }
+    },
+    groupFeedDetailElementRepliesCountElement: {
+        get: function() {
+            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:last-child>div:last-child .subdued");
+        }
+    },
+    groupFeedDetailElementDeleteButton: {
+        get: function() {
             return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='delete_access']");
         }
     },
     groupFeedDetailElementEditButton: {
-        get : function(){
+        get: function() {
             return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='edit_access']");
         }
     },
-    DeletePostModalButtons : {
-        get : function(){
+    DeletePostModalButtons: {
+        get: function() {
             return browser.elements(".popup-buttons button");
         }
     },
@@ -67,43 +81,43 @@ var GroupsPage = Object.create(Page, {
             return browser.element(".media-modal .file-name");
         }
     },
-    addPostTextArea : {
-        get : function(){
+    addPostTextArea: {
+        get: function() {
             return browser.element(".modal-add-post .feed-text-area");
-        }   
+        }
     },
-    feedReplyTextBox : {
-        get : function(){
+    feedReplyTextBox: {
+        get: function() {
             return browser.element(".comment-footer .feed-text-area");
         }
     },
-    feedReplyPostButton : {
-        get : function(){
+    feedReplyPostButton: {
+        get: function() {
             return browser.element(".comment-footer button.primary-button");
         }
     },
-    feedReplyCommentPost : {
-        get : function(){
+    feedReplyCommentPost: {
+        get: function() {
             return browser.element(".menu-content .pane[nav-view='active'] .feed-element .comment-item");
         }
     },
-    feedReplyCommentPostContent : {
-        get : function(){
+    feedReplyCommentPostContent: {
+        get: function() {
             return browser.getText(".menu-content .pane[nav-view='active'] .feed-element .comment-item header>div:first-child>p:last-child");
         }
     }
-    
+
 });
 
-GroupsPage.getFeedAttachmentElement = function(feedElement){
+GroupsPage.getFeedAttachmentElement = function(feedElement) {
     return feedElement.element(".file-thumbnail>img");
 };
 
-GroupsPage.getFeedContentNode = function(feedElement){
+GroupsPage.getFeedContentNode = function(feedElement) {
     return feedElement.element(".content-text");
 };
 
-GroupsPage.getFeedTimestampNode = function(feedElement){
+GroupsPage.getFeedTimestampNode = function(feedElement) {
     return feedElement.element(".relative-time-element");
 };
 

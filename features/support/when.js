@@ -1,6 +1,7 @@
 var MainPage = require('../../pageobjects/main.page');
 var MessagesPage = require('../../pageobjects/messages.page');
 var UserMentionPage = require('../../pageobjects/usermention.page');
+var LoginPage = require('../../pageobjects/login.page');
 
 var AddPostModal = require('../../pageobjects/addpost.modal');
 var SignOutModal = require('../../pageobjects/signout.modal');
@@ -9,6 +10,8 @@ var World = require('./world');
 
 module.exports = function() {
 	this.When(/^I log in with (:?QAI|PROD|PERFDEV|DEV) (:?MP user|MP approver|MP final approver|ESS-only|PS-only) credentials$/, function(environment, account) {
+
+
 		var credentials = {
 			qai: {
 				'mp user': {
@@ -40,10 +43,13 @@ module.exports = function() {
 				'ps-only': {}
 			}
 		};
+		LoginPage.username.waitForVisible();
+		LoginPage.password.waitForVisible();
 		World.logMeIn(credentials[environment.toLowerCase()][account.toLowerCase()].user, credentials[environment.toLowerCase()][account.toLowerCase()].pass);
 	});
 
 	this.When(/^I log in with "([^"]*)" and "([^"]*)"$/, function(username, password) {
+
 		World.logMeIn(username, password);
 	});
 
@@ -71,6 +77,7 @@ module.exports = function() {
 		if (text === 'Sign Out' || text === 'Cancel') {
 			SignOutModal.modalButtons.waitForVisible();
 			SignOutModal.modalButtons.click('button*=' + text);
+
 		} else {
 			// TODO: To be completed when other modal buttons are required to be clicked.
 		}

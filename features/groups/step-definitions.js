@@ -36,7 +36,7 @@ module.exports = function() {
         }
     });
 
-    this.Then(/^refresh the feed page$/, function(){
+    this.Given(/^I refresh the feed page$/, function(){
         browser.refresh();
         GroupsPage.feeds.waitForVisible();
         GroupsPage.feedElement.click();
@@ -67,10 +67,9 @@ module.exports = function() {
 
     this.Then(/^I verify that post is successfully deleted from the feed trail$/, function(){
         GroupsPage.feeds.waitForVisible();
-        
         var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now" ? true : false;
         var feedTextContentMatched = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText().toLowerCase() == "test feed" ? true : false;
-        if(feedTimeMatched){ // when all tests run together feedTime may match but feed content should not matched
+        if(feedTimeMatched){ // when all tests run together feedTime may match but feed content should not match
             if(!feedTextContentMatched){
                 expect(true).toEqual(true);
             }
@@ -84,11 +83,10 @@ module.exports = function() {
     this.When(/^I edit the feed text to "([^"]*)"$/, function(editedGroupFeedText){
         GroupsPage.groupFeedDetailElementEditButton.waitForVisible();
         GroupsPage.groupFeedDetailElementEditButton.click();
-
         GroupsPage.addPostTextArea.waitForVisible();
         GroupsPage.addPostTextArea.setValue(editedGroupFeedText);
     });
-    
+
     this.When(/^I verify that feed text change to "([^"]*)"$/, function(editedGroupFeedText){
         browser.waitUntil(function(){
             return (GroupsPage.groupFeedDetailElementContent == editedGroupFeedText);
@@ -105,11 +103,9 @@ module.exports = function() {
         GroupsPage.feedReplyCommentPost.waitForVisible();
         expect(GroupsPage.feedReplyCommentPostContent).toEqual(replyText);
     });
-    
+
     this.Then(/^number of replies text to post updated to "([^"]*)"$/, function(repliesCount){
         expect(GroupsPage.groupFeedDetailElementRepliesCountElement.getText()).toEqual(repliesCount);
     });
-     
-    
 
 };
