@@ -9,4 +9,13 @@ module.exports = function () {
 	this.Then(/^I close the current tab$/, function () {
 		browser.close();
 	});
+
+	this.Then(/^I see "([^"]*)"$/, function (text) {
+		browser.waitForVisible('span*=' + text);
+		expect(browser.element('span*=' + text).getText()).toMatch(text);
+	});
+
+	this.Then(/^I take "([^"]*)" screenshot$/, function (filename) {
+		browser.saveScreenshot('./test-screenshots/' + filename);
+	});
 };

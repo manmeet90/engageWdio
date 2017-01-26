@@ -43,7 +43,7 @@ var GroupsPage = Object.create(Page, {
     },
     groupFeedDetailElementLikeButton: {
         get: function() {
-            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
+return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child footer>div>div:first-child");
         }
     },
     groupFeedDetailElementLikeButtonText: {

@@ -2,7 +2,7 @@ var MainPage = require('../../pageobjects/main.page');
 
 var AllApplicationsModal = require('../../pageobjects/allapplications.modal');
 
-var world = require('../support/world.js');
+var World = require('../support/world.js');
 
 module.exports = function () {
 	this.Given(/^I open the Connected App directory$/, function () {
@@ -17,8 +17,16 @@ module.exports = function () {
 		while (browser.getTabIds().length === 1) {
 			browser.pause(500);
 		}
-		world.checkAndSwitchTab();
+		World.checkAndSwitchTab();
 
-		browser.waitForExist('div', 60000); // TODO: Still to be improved...
+		switch (text) {
+			case 'MarketPlace':
+				// We wait for the loading spinner to be first visible and then invisible, so that MP2 loads completely.
+				browser.waitForVisible('.loading-spinner--side', 60000);
+				browser.waitForVisible('.loading-spinner--side', 60000, true);
+				break;
+			default:
+				browser.waitForVisible('div', 60000);
+		}
 	});
 };

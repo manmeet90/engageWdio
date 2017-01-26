@@ -3,17 +3,17 @@ var Page = require('./page');
 var LoginPage = Object.create(Page, {
 	username: {
 		get: function () {
-			return browser.element('#j_id0\\:j_id1\\:j_id15\\:username');
+			return browser.element('input[id*="username"]');
 		}
 	},
 	password: {
 		get: function () {
-			return browser.element('[name=j_id0\\:j_id1\\:j_id15\\:j_id23]');
+			return browser.element('input[type="password"]');
 		}
 	},
 	loginBtn: {
 		get: function () {
-			return browser.element('#j_id0\\:j_id1\\:j_id15\\:submit');
+			return browser.element('input[type="submit"]');
 		}
 	},
 	errorMsg: {

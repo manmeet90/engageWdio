@@ -8,6 +8,8 @@ module.exports = {
 		currentTab === firstTab ? browser.switchTab(secondTab) : browser.switchTab(firstTab);
 	},
 	logMeIn: function (user, pass) {
+		LoginPage.username.waitForVisible();
+		LoginPage.password.waitForVisible();
 		LoginPage.username.setValue(user);
 		LoginPage.password.setValue(pass);
 		LoginPage.submit();

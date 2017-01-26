@@ -36,14 +36,14 @@ module.exports = function() {
         }
     });
 
-    this.Given(/^I refresh the feed page$/, function() {
+    this.Given(/^I refresh the groups feed page$/, function() {
         browser.refresh();
         GroupsPage.feeds.waitForVisible();
         GroupsPage.feedElement.click();
     });
 
     this.When(/^I click on Like button$/, function() {
-        GroupsPage.groupFeedDetailElement.waitForVisible();
+        GroupsPage.groupFeedDetailElementLikeButton.waitForVisible();
         GroupsPage.groupFeedDetailElementLikeButton.click();
     });
 
@@ -68,15 +68,20 @@ module.exports = function() {
     this.Then(/^I verify that post is successfully deleted from the feed trail$/, function() {
         GroupsPage.feeds.waitForVisible();
         var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now"? true : false;
+
         var feedTextContentMatched = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText().toLowerCase() == "test feed" ? true : false;
         if (feedTimeMatched) { // when all tests run together feedTime may match but feed content should not match
             if (!feedTextContentMatched) {
-                expect(true).toEqual(true);
+                expect(true).toEqual(false);
+            }else{
+              expect(true).toEqual(true);
             }
-        } else if (!feedTextContentMatched && !feedTimeMatched) { // when scenario for delete feed test ran alone neither feedtime nor feedtext should match
+        }else{// in case the test took long enough time for the time stamp to change to 1 min ago
+          if(feedTextContentMatched){
             expect(true).toEqual(true);
-        } else {
+          }else{
             expect(true).toEqual(false);
+          }
         }
     });
 
@@ -107,7 +112,7 @@ module.exports = function() {
     this.Then(/^number of replies text to post updated to "([^"]*)"$/, function(repliesCount) {
         expect(GroupsPage.groupFeedDetailElementRepliesCountElement.getText()).toEqual(repliesCount);
     });
-    
+
     this.When(/^I click on "([^"]*)" post$/, function(arg1) {
       GroupsPage.feeds.waitForVisible();
       GroupsPage.feedElement.click();

@@ -22,39 +22,46 @@ module.exports = {
 	singleSnippetPerFile: true,
 	recommendedFilenameSeparator: '-',
 	chai: false,
-	screenshotsOnError: false,
+	screenshotsOnError: true,
 	screenshotsPath: './error-screenshots',
 	captureAllStepScreenshots: false,
 	saveScreenshotsToDisk: true,
   // Note: With a large viewport size and captureAllStepScreenshots enabled,
   // you may run out of memory. Use browser.setViewportSize to make the
   // viewport size smaller.
-	saveScreenshotsToReport: false,
-	jsonOutput: null,
+	saveScreenshotsToReport: true,
+	jsonOutput: './output/cucumber.json',
   // compiler: 'js:' + path.resolve(__dirname, '../lib/babel-register.js'),
 	conditionOutput: true,
 
+  // - - - - CUCUMBER REPORT - - - -
+	htmlReport: true,
+	theme: 'bootstrap',
+	jsonFile: './output/cucumber.json',
+	output: './output/report/cucumber.html',
+	reportSuiteAsScenarios: true,
+	launchReport: false,
+
   // - - - - SELENIUM  - - - -
-	browser: 'chrome',
+	browser: 'phantomjs',
 	platform: 'ANY',
 	name: '',
 	user: '',
 	key: '',
 	port: Math.floor(Math.random() * 8000) + 1000,
 	host: null,
-  // deviceName: null,
 
   // - - - - WEBDRIVER-IO  - - - -
 	webdriverio: {
 		desiredCapabilities: {},
-		logLevel: 'silent',
-    // logOutput: null,
+		logLevel: 'verbose',
+		logOutput: './logs',
 		host: '127.0.0.1',
 		port: 4444,
 		path: '/wd/hub',
 		baseUrl: 'https://qapartial-fourth-app.cs87.force.com/',
 		coloredLogs: true,
-		screenshotPath: null,
+		screenshotPath: './error-screenshots',
 		waitforTimeout: 30000,
 		waitforInterval: 250
 	},
@@ -125,7 +132,7 @@ module.exports = {
 	phantom_ignoreSSLErrors: false,
 
   // - - - - DEBUGGING  - - - -
-	log: 'info',
+	log: 'verbose',
 	debug: false,
 	seleniumDebug: null,
 	debugCucumber: null,
