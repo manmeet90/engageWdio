@@ -65,24 +65,11 @@ module.exports = function() {
         GroupsPage.DeletePostModalButtons.click("button*=Delete");
     });
 
-    this.Then(/^I verify that post is successfully deleted from the feed trail$/, function() {
+    this.Then(/^I verify that post "([^"]*)" is successfully deleted from the feed trail$/, function(postMessage) {
         GroupsPage.feeds.waitForVisible();
-        var feedTimeMatched = GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() == "last updated just now"? true : false;
-
-        var feedTextContentMatched = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText().toLowerCase() == "test feed" ? true : false;
-        if (feedTimeMatched) { // when all tests run together feedTime may match but feed content should not match
-            if (!feedTextContentMatched) {
-                expect(true).toEqual(false);
-            }else{
-              expect(true).toEqual(true);
-            }
-        }else{// in case the test took long enough time for the time stamp to change to 1 min ago
-          if(feedTextContentMatched){
-            expect(true).toEqual(true);
-          }else{
-            expect(true).toEqual(false);
-          }
-        }
+        var testResult = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText() !== postMessage ? true :  GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() !== "last updated just now" ? true : false;
+        
+        expect(testResult).toEqual(true);
     });
 
     this.When(/^I edit the feed text to "([^"]*)"$/, function(editedGroupFeedText) {
