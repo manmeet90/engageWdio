@@ -63,7 +63,7 @@ return browser.element(".menu-content .pane[nav-view='active'] .feed-element .li
     },
     groupFeedDetailElementDeleteButton: {
         get: function() {
-            return browser.element(".menu-content .pane[nav-view='active'] .feed-element .list .item:first-child .feed-additional-buttons span[ng-if='delete_access']");
+            return browser.element(".icon-uniE708");
         }
     },
     groupFeedDetailElementEditButton: {

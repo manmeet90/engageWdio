@@ -28,7 +28,6 @@ Feature: Engage -- Groups-B
               | EditedGroupFeedText       |
               | "Edited Group Feed Text"  |
 
-    @watch
     Scenario Outline: I should be able to reply a group post
         Given I add a new post "Test Feed"
         And I click the "Submit" button
@@ -59,5 +58,5 @@ Feature: Engage -- Groups-B
           And I log in with QAI MP approver credentials
           And I click the "Groups" side panel button
           And I visit the "TS_QAI" group
-          When I click on "Can not delete this group Feed" post
+          When I click on the post
           Then I verify that delete option is unavailable
