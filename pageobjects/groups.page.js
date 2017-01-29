@@ -110,15 +110,15 @@ return browser.element(".menu-content .pane[nav-view='active'] .feed-element .li
 });
 
 GroupsPage.getFeedAttachmentElement = function(feedElement) {
-    return feedElement.element(".file-thumbnail>img");
+    return browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child .file-thumbnail>img");
 };
 
 GroupsPage.getFeedContentNode = function(feedElement) {
-    return feedElement.element(".content-text");
+    return browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child .content-text");
 };
 
 GroupsPage.getFeedTimestampNode = function(feedElement) {
-    return feedElement.element(".relative-time-element");
+    return browser.element(".menu-content .pane[nav-view='active'] .feeds .list .item:first-child .relative-time-element");
 };
 
 module.exports = GroupsPage;
