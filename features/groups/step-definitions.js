@@ -67,9 +67,7 @@ module.exports = function() {
 
     this.Then(/^I verify that post "([^"]*)" is successfully deleted from the feed trail$/, function(postMessage) {
         GroupsPage.feeds.waitForVisible();
-        var testResult =
-GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText() !== postMessage ? true :  GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() !== "last updated just now" ? true : false;
-
+        var testResult = GroupsPage.getFeedContentNode(GroupsPage.feedElement).getText() !== postMessage ? true :  GroupsPage.getFeedTimestampNode(GroupsPage.feedElement).getText().toLowerCase() !== "last updated just now" ? true : false;
         expect(testResult).toEqual(true);
     });
 
